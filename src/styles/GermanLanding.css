@@ -1,0 +1,181 @@
+.gl-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  min-height: 100vh;
+}
+
+.gl-content {
+  width: 100%;
+  max-width: 620px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  padding-bottom: var(--spacing-2xl);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* ── Header ── */
+.gl-header {
+  text-align: center;
+  padding: var(--spacing-md) 0 0;
+}
+
+.gl-flag {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.gl-title {
+  margin: 8px 0 4px;
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.02em;
+}
+
+.gl-subtitle {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.04em;
+}
+
+/* ── Section wrapper ── */
+.gl-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.gl-section-label {
+  margin: 0;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+/* ── Tools grid ── */
+.gl-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 420px) {
+  .gl-tools-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.gl-tool-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 14px 10px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.14);
+  border-radius: 14px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, border-color 0.2s;
+}
+.gl-tool-btn:hover {
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.3);
+  transform: translateY(-2px);
+}
+.gl-tool-btn:active { transform: translateY(0); }
+
+.gl-tool-icon {
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.gl-tool-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.01em;
+  color: rgba(255,255,255,0.88);
+}
+
+/* ── Songs block ── */
+.gl-songs-block {
+  width: 100%;
+  text-align: left;
+  padding: 16px 18px;
+  background: linear-gradient(135deg, rgba(180,50,50,0.25) 0%, rgba(80,0,0,0.35) 100%);
+  border: 1px solid rgba(255,100,100,0.22);
+  border-radius: 16px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.gl-songs-block:hover {
+  background: linear-gradient(135deg, rgba(200,60,60,0.32) 0%, rgba(100,10,10,0.4) 100%);
+  transform: translateY(-1px);
+}
+
+.gl-songs-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.gl-songs-band {
+  font-size: 1.2rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+}
+
+.gl-songs-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  padding: 3px 10px;
+  color: rgba(255,255,255,0.7);
+  white-space: nowrap;
+}
+
+.gl-songs-preview {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+.gl-songs-cta {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: rgba(255,160,160,0.85);
+  letter-spacing: 0.02em;
+}
+
+/* ── Back button ── */
+.gl-back-btn {
+  align-self: center;
+  padding: 10px 24px;
+  border-radius: 24px;
+  border: 2px solid rgba(255,255,255,0.25);
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s;
+}
+.gl-back-btn:hover {
+  color: white;
+  border-color: rgba(255,255,255,0.5);
+}

@@ -1,0 +1,310 @@
+.gcw-container {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: var(--spacing-lg);
+  min-height: 100vh;
+}
+
+.gcw-content {
+  width: 100%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  padding-bottom: var(--spacing-2xl);
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ── Header ── */
+.gcw-header {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.gcw-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.4);
+  background: rgba(255,255,255,0.15);
+  color: white;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.gcw-back-btn:hover { background: rgba(255,255,255,0.3); }
+
+.gcw-header-text {
+  flex: 1;
+  text-align: center;
+  padding-right: 40px;
+}
+
+.gcw-title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: white;
+}
+
+.gcw-subtitle {
+  margin: 2px 0 0;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+}
+
+/* ── Progress ── */
+.gcw-progress {
+  text-align: center;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.05em;
+}
+
+/* ── Flip card ── */
+.gcw-card-scene {
+  perspective: 1200px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.gcw-card {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gcw-card--flipped {
+  transform: rotateY(180deg);
+}
+
+.gcw-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 20px;
+  padding: 2rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+/* Front */
+.gcw-card-front {
+  background: linear-gradient(135deg, rgba(255,255,255,0.18) 0%, rgba(255,255,255,0.08) 100%);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.gcw-emoji {
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.gcw-word {
+  font-size: 2rem;
+  font-weight: 800;
+  color: white;
+  text-align: center;
+}
+
+.gcw-ipa {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.55);
+  font-family: monospace;
+  letter-spacing: 0.05em;
+}
+
+.gcw-parts {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.gcw-plus {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.4);
+  font-weight: 300;
+}
+
+.gcw-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 0.4rem 0.8rem;
+  min-width: 80px;
+}
+
+.gcw-part-de {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+}
+
+.gcw-part-en {
+  font-size: 0.72rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 2px;
+  text-align: center;
+}
+
+.gcw-speak-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s;
+}
+.gcw-speak-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.55);
+  transform: scale(1.08);
+}
+.gcw-speak-btn--active {
+  background: rgba(100,200,255,0.2);
+  border-color: rgba(100,200,255,0.6);
+  animation: gcwPulse 1s ease-in-out infinite;
+}
+
+@keyframes gcwPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(100,200,255,0.4); }
+  50%       { box-shadow: 0 0 0 8px rgba(100,200,255,0); }
+}
+
+.gcw-tap-hint {
+  margin-top: 0.75rem;
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.03em;
+}
+
+/* Back */
+.gcw-card-back {
+  background: linear-gradient(135deg, rgba(80, 40, 160, 0.92) 0%, rgba(40, 20, 100, 0.95) 100%);
+  border: 1px solid rgba(150,100,255,0.5);
+  transform: rotateY(180deg);
+  gap: 1rem;
+  justify-content: flex-start;
+  padding-top: 2.25rem;
+}
+
+.gcw-literal {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.75);
+  text-align: center;
+}
+
+.gcw-literal-label {
+  font-weight: 600;
+  color: rgba(180,140,255,0.9);
+}
+
+.gcw-explanation {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  color: rgba(255,255,255,0.88);
+  text-align: center;
+}
+
+.gcw-example {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border-left: 3px solid rgba(180,140,255,0.6);
+  border-radius: 0 8px 8px 0;
+  padding: 0.6rem 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.gcw-example-de {
+  font-style: italic;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.85);
+}
+
+.gcw-example-en {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.45);
+  margin-top: 3px;
+}
+
+/* ── Nav buttons ── */
+.gcw-nav {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.gcw-nav-btn {
+  flex: 1;
+  max-width: 160px;
+  padding: 0.65rem 1rem;
+  border-radius: 12px;
+  border: 2px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.1);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+}
+.gcw-nav-btn:hover {
+  background: rgba(255,255,255,0.22);
+  border-color: rgba(255,255,255,0.55);
+}
+
+/* ── Dot indicators ── */
+.gcw-dots {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  padding: 0 1rem;
+}
+
+.gcw-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.25);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.gcw-dot--active {
+  background: rgba(180,140,255,0.9);
+  transform: scale(1.35);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+  .gcw-word { font-size: 1.6rem; }
+  .gcw-emoji { font-size: 2.8rem; }
+  .gcw-card { min-height: 420px; }
+  .gcw-card-back { padding-top: 1.75rem; }
+}
