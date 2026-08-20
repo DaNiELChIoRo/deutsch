@@ -12,6 +12,10 @@ const CARDS_PER_PAGE = 6;
 // Quizzes that accept user-added words. Others stay read-only.
 const CUSTOM_WORDS_ENABLED_FOR = ['german-vocabulary', 'fes-iztacala-level-2'];
 
+// Decks that are graded exam drills, not a vocabulary set to memorize —
+// these skip the flip-card study mode and go straight to the quiz.
+const QUIZ_ONLY_DECKS = ['a1-exam-practice'];
+
 // A stored word becomes a card in the same shape as the bundled ones. Only one
 // option is supplied — buildQuizOptions() fills the other three from the deck.
 function customWordToCard(entry, language) {
@@ -394,7 +398,8 @@ const FlashCards = ({ quizId = 'greek-vocabulary', onHome }) => {
   const { quizzes } = useData();
   const { t, language } = useI18n();
 
-  const [mode, setMode]           = useState('study');  // 'study' | 'quiz'
+  const quizOnly = QUIZ_ONLY_DECKS.includes(quizId);
+  const [mode, setMode]           = useState(quizOnly ? 'quiz' : 'study');  // 'study' | 'quiz'
   const [page, setPage]           = useState(0);
   const [shuffleKey, setShuffleKey] = useState(0);
   const [knownIds, setKnownIds]   = useLocalStorage(`itiapp-flashcard-progress-${quizId}`, []);
@@ -487,23 +492,25 @@ const FlashCards = ({ quizId = 'greek-vocabulary', onHome }) => {
         </div>
 
         {/* Mode tabs */}
-        <div className="fc-mode-tabs">
-          <button
-            className={`fc-mode-tab ${mode === 'study' ? 'active' : ''}`}
-            onClick={() => handleModeSwitch('study')}
-          >
-            📚 {language === 'es' ? 'Tarjetas' : 'Study'}
-          </button>
-          <button
-            className={`fc-mode-tab ${mode === 'quiz' ? 'active' : ''}`}
-            onClick={() => handleModeSwitch('quiz')}
-          >
-            🧠 {language === 'es' ? 'Quiz' : 'Quiz'}
-          </button>
-        </div>
+        {!quizOnly && (
+          <div className="fc-mode-tabs">
+            <button
+              className={`fc-mode-tab ${mode === 'study' ? 'active' : ''}`}
+              onClick={() => handleModeSwitch('study')}
+            >
+              📚 {language === 'es' ? 'Tarjetas' : 'Study'}
+            </button>
+            <button
+              className={`fc-mode-tab ${mode === 'quiz' ? 'active' : ''}`}
+              onClick={() => handleModeSwitch('quiz')}
+            >
+              🧠 {language === 'es' ? 'Quiz' : 'Quiz'}
+            </button>
+          </div>
+        )}
 
         {/* Modes */}
-        {mode === 'study' ? (
+        {!quizOnly && mode === 'study' ? (
           <StudyMode
             cards={filteredCards}
             allCards={allCards}
