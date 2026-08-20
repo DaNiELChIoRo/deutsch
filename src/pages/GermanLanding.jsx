@@ -12,6 +12,20 @@ const TOOLS = [
     path: '/flashcards',
   },
   {
+    icon: '🎓',
+    key: 'fes-iztacala-2',
+    en: 'Vocabulary level 2 · FES Iztacala',
+    es: 'Vocabulario nivel 2 · FES Iztacala',
+    path: '/fes-iztacala-2',
+  },
+  {
+    icon: '📝',
+    key: 'a1-exam',
+    en: 'A1 Exam Practice',
+    es: 'Práctica de Examen A1',
+    path: '/a1-exam',
+  },
+  {
     icon: '🔤',
     key: 'verben',
     en: 'Verbs',

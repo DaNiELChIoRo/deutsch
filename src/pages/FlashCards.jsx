@@ -3,9 +3,31 @@ import { useData } from '../contexts/DataContext';
 import { useI18n } from '../i18n/I18nContext';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 import { useTextToSpeech } from '../hooks/useTextToSpeech';
+import { useCustomVocabulary } from '../hooks/useCustomVocabulary';
+import AddWordDialog from '../components/features/AddWordDialog';
 import '../styles/FlashCards.css';
 
 const CARDS_PER_PAGE = 6;
+
+// Quizzes that accept user-added words. Others stay read-only.
+const CUSTOM_WORDS_ENABLED_FOR = ['german-vocabulary', 'fes-iztacala-level-2'];
+
+// A stored word becomes a card in the same shape as the bundled ones. Only one
+// option is supplied — buildQuizOptions() fills the other three from the deck.
+function customWordToCard(entry, language) {
+  return {
+    id: entry.id,
+    word: entry.word,
+    ipa: entry.ipa || '',
+    question: language === 'es'
+      ? `¿Qué significa '${entry.word}'?`
+      : `What does '${entry.word}' mean?`,
+    options: [entry.translation],
+    correctIndex: 0,
+    reference: language === 'es' ? 'Personal' : 'Custom',
+    isCustom: true,
+  };
+}
 
 function shuffleArray(array) {
   const shuffled = [...array];
@@ -377,6 +399,10 @@ const FlashCards = ({ quizId = 'greek-vocabulary', onHome }) => {
   const [shuffleKey, setShuffleKey] = useState(0);
   const [knownIds, setKnownIds]   = useLocalStorage(`itiapp-flashcard-progress-${quizId}`, []);
   const [filter, setFilter]       = useState('all');
+  const [showAddWord, setShowAddWord] = useState(false);
+
+  const customEnabled = CUSTOM_WORDS_ENABLED_FOR.includes(quizId);
+  const { deviceId, words: customWords, addWord, removeWord, syncState } = useCustomVocabulary(quizId);
 
   const quiz = useMemo(() => quizzes.find(q => q.id === quizId), [quizzes, quizId]);
   const quizTitle = useMemo(
@@ -387,13 +413,22 @@ const FlashCards = ({ quizId = 'greek-vocabulary', onHome }) => {
   const allCards = useMemo(() => {
     if (!quiz) return [];
     const langData = quiz[language] || quiz.en || [];
-    return shuffleArray(langData);
-  }, [quiz, language, shuffleKey]);
+    const custom = customEnabled ? customWords.map(w => customWordToCard(w, language)) : [];
+    return shuffleArray([...langData, ...custom]);
+  }, [quiz, language, shuffleKey, customEnabled, customWords]);
 
   const filteredCards = useMemo(() => {
     if (filter === 'notLearned') return allCards.filter(c => !knownIds.includes(c.id));
     return allCards;
   }, [allCards, filter, knownIds]);
+
+  // Count only ids that still correspond to a real card. Removing a custom word
+  // leaves its id behind in stored progress, which would otherwise push the
+  // progress bar past 100%.
+  const learnedCount = useMemo(() => {
+    const present = new Set(allCards.map(c => c.id));
+    return knownIds.filter(id => present.has(id)).length;
+  }, [allCards, knownIds]);
 
   const handleFilterChange = useCallback((f) => {
     setFilter(f);
@@ -441,12 +476,12 @@ const FlashCards = ({ quizId = 'greek-vocabulary', onHome }) => {
         {/* Progress bar (always visible) */}
         <div className="flashcards-progress-bar">
           <div className="flashcards-progress-text">
-            {knownIds.length} / {allCards.length} {t('flashcards.learned')}
+            {learnedCount} / {allCards.length} {t('flashcards.learned')}
           </div>
           <div className="flashcards-progress-track">
             <div
               className="flashcards-progress-fill"
-              style={{ width: `${(knownIds.length / allCards.length) * 100}%` }}
+              style={{ width: `${(learnedCount / allCards.length) * 100}%` }}
             />
           </div>
         </div>
@@ -499,12 +534,33 @@ const FlashCards = ({ quizId = 'greek-vocabulary', onHome }) => {
 
         {/* Back to home always at bottom */}
         <div className="flashcards-actions" style={{ marginTop: 'var(--spacing-md)' }}>
+          {customEnabled && (
+            <button
+              className="flashcard-action-btn awd-trigger"
+              onClick={() => setShowAddWord(true)}
+            >
+              ➕ {language === 'es' ? 'Agregar palabra' : 'Add word'}
+              {customWords.length > 0 && ` (${customWords.length})`}
+            </button>
+          )}
           <button className="flashcard-action-btn" onClick={onHome}>
             {t('flashcards.backToHome')}
           </button>
         </div>
 
       </div>
+
+      {showAddWord && (
+        <AddWordDialog
+          words={customWords}
+          addWord={addWord}
+          removeWord={removeWord}
+          syncState={syncState}
+          deviceId={deviceId}
+          language={language}
+          onClose={() => setShowAddWord(false)}
+        />
+      )}
     </div>
   );
 };

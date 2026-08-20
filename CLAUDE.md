@@ -65,6 +65,58 @@ that file over wholesale.
 Quiz data is bilingual: `{ en: [...questions], es: [...questions] }`. Translations are a nested
 object read by dot-path (`t('home.quizTypes.order.title')`) with automatic English fallback.
 
+### User-added vocabulary
+
+Learners can add their own words on the flashcards page. The pieces:
+
+- `src/utils/deviceId.js` — a v4 UUID minted on first use and kept in localStorage
+- `src/hooks/useCustomVocabulary.js` — state, persistence, and Firestore reconciliation
+- `src/components/features/AddWordDialog.jsx` — the add/manage modal
+- `firestore.rules` — **must be deployed** before this is safe in production
+
+**localStorage is the source of truth**, so the feature works with no Firebase config and
+offline. When Firebase *is* configured the list is mirrored to
+`userVocabulary/{deviceId}.decks[deckId]`. Writes always land locally first; a failed sync
+degrades to an "offline" badge and never drops the word.
+
+**Everything is scoped per deck.** `useCustomVocabulary(deckId)` keys localStorage as
+`deutsch-custom-vocabulary-<deckId>` and writes Firestore with `merge: true`, so words added
+to one deck never leak into another and saving one deck can't clobber another. Decks that
+accept custom words are listed in `CUSTOM_WORDS_ENABLED_FOR` in `FlashCards.jsx` — currently
+`german-vocabulary` and `fes-iztacala-level-2`. The A1 exam set is deliberately excluded:
+it's a fixed practice set, not a personal list.
+
+### Quiz decks
+
+Three decks are registered in `DataContext.jsx` `FALLBACK_QUIZZES`, each backed by a file in
+`src/utils/` and reachable through its own route:
+
+| id | route | source | custom words |
+|---|---|---|---|
+| `german-vocabulary` | `/flashcards` | `germanVocabulary.js` | yes |
+| `fes-iztacala-level-2` | `/fes-iztacala-2` | `fesIztacalaLevel2.js` | yes |
+| `a1-exam-practice` | `/a1-exam` | `a1ExamPractice.js` | no |
+
+All three share the card shape, so `FlashCards.jsx` renders any of them. Adding a fourth
+means: a file in `src/utils/`, an entry in `FALLBACK_QUIZZES`, a `<Route>` in
+`GermanSection.jsx`, and a tile in the `TOOLS` array in `GermanLanding.jsx`.
+
+A stored word is `{ id, word, translation, ipa, createdAt }`. `customWordToCard()` in
+`FlashCards.jsx` turns it into the same card shape as bundled vocabulary, supplying just one
+option — `buildQuizOptions()` already backfills three distractors from the rest of the deck,
+so users are never asked to invent wrong answers.
+
+Custom card ids are strings (`custom-<uuid>-<ts>`) while bundled ids are numbers, so they
+can't collide in the stored `knownIds` progress array. Progress counts are intersected
+against the live card list (`learnedCount`), because deleting a learned custom word would
+otherwise leave a stale id and push the progress bar past 100%.
+
+**The device id is a bearer token, not an identity.** Anyone holding it can read and
+overwrite that word list. The rules file denies `list` so the collection can't be
+enumerated, checks the id is UUID-shaped, and bounds the payload — but the real fix, if this
+ever needs to be genuinely private, is Firebase Anonymous Auth keyed on `request.auth.uid`.
+Read the header comment in `firestore.rules` before changing any of this.
+
 ### Adding a song lesson
 
 Song lessons follow a rigid pattern — copy an existing one (e.g. `NebelLesson.jsx`):

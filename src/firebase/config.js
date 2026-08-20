@@ -25,5 +25,5 @@ isSupported().then(supported => {
   }
 });
 
-export { db, auth, analytics };
+export { db, auth, analytics, hasValidConfig as isFirebaseConfigured };
 export default app;

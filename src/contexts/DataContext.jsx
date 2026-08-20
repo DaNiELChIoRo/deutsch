@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { getAllQuizzes, getTranslations as fetchTranslations } from '../firebase/firestoreService';
 import { GERMAN_VOCABULARY_QUIZ } from '../utils/germanVocabulary';
+import { A1_EXAM_PRACTICE_QUIZ } from '../utils/a1ExamPractice';
+import { FES_IZTACALA_LEVEL_2_QUIZ } from '../utils/fesIztacalaLevel2';
 import { translations as hardcodedTranslations } from '../i18n/translations';
 
 const DataContext = createContext(null);
@@ -18,6 +20,30 @@ const FALLBACK_QUIZZES = [
     category: 'knowledge',
     en: GERMAN_VOCABULARY_QUIZ.en,
     es: GERMAN_VOCABULARY_QUIZ.es
+  },
+  {
+    id: 'fes-iztacala-level-2',
+    title: { en: 'Vocabulary level 2 FES Iztacala', es: 'Vocabulario nivel 2 FES Iztacala' },
+    description: {
+      en: 'Course word list — add your own words as the class goes on',
+      es: 'Lista del curso — agrega tus propias palabras conforme avanza la clase'
+    },
+    icon: '🎓',
+    category: 'knowledge',
+    en: FES_IZTACALA_LEVEL_2_QUIZ.en,
+    es: FES_IZTACALA_LEVEL_2_QUIZ.es
+  },
+  {
+    id: 'a1-exam-practice',
+    title: { en: 'A1 exam practice', es: 'Práctica de examen A1' },
+    description: {
+      en: 'Grammar drill across the full A1 syllabus — cases, verbs, prepositions, Perfekt',
+      es: 'Ejercicios de gramática de todo el temario A1: casos, verbos, preposiciones, Perfekt'
+    },
+    icon: '📝',
+    category: 'grammar',
+    en: A1_EXAM_PRACTICE_QUIZ.en,
+    es: A1_EXAM_PRACTICE_QUIZ.es
   }
 ];
 

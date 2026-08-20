@@ -1,0 +1,107 @@
+// A1 exam practice — grammar drill covering the standard A1 syllabus:
+// verb conjugation, cases, pronouns, prepositions, modals and Perfekt.
+//
+// Topic sequence follows the 8-Lektion structure of the Passau A1 grammar
+// syllabus (Witzlinger, "Deutsch — Aber Hallo!", ISBN 978-3-7098-0827-6).
+// The sentences below are original and written for this app; only the ordering
+// of grammar topics is taken from that outline.
+//
+// Card shape matches GERMAN_VOCABULARY_QUIZ so it plugs into FlashCards:
+//   word          the gapped sentence (card front / quiz prompt)
+//   options[0]    the correct form — options are shuffled at runtime
+//   reference     "<Lektion>.<topic> label", shown on the card back
+
+export const A1_EXAM_PRACTICE_QUIZ = {
+  en: [
+    { id: 1, word: "Ich ___ aus Spanien.", ipa: "", question: "Complete: Ich ___ aus Spanien.", options: ["komme", "kommst", "kommt", "kommen"], correctIndex: 0, reference: "1.1 Verb conjugation" },
+    { id: 2, word: "Wir ___ jeden Tag Deutsch.", ipa: "", question: "Complete: Wir ___ jeden Tag Deutsch.", options: ["lernen", "lernt", "lernst", "lerne"], correctIndex: 0, reference: "1.1 Verb conjugation" },
+    { id: 3, word: "Ihr ___ sehr schnell.", ipa: "", question: "Complete: Ihr ___ sehr schnell.", options: ["arbeitet", "arbeiten", "arbeitest", "arbeite"], correctIndex: 0, reference: "1.1 Verb conjugation" },
+    { id: 4, word: "___ ist Lehrerin. Sie heißt Frau Berg.", ipa: "", question: "Complete: ___ ist Lehrerin. Sie heißt Frau Berg.", options: ["Sie", "Er", "Es", "Wir"], correctIndex: 0, reference: "1.2 Personal pronouns · nominative" },
+    { id: 5, word: "___ du aus Italien?", ipa: "", question: "Complete: ___ du aus Italien?", options: ["Kommst", "Kommen", "Kommt", "Komme"], correctIndex: 0, reference: "1.3 Word order · question" },
+    { id: 6, word: "Woher ___ Sie?", ipa: "", question: "Complete: Woher ___ Sie?", options: ["kommen", "kommt", "kommst", "komme"], correctIndex: 0, reference: "1.3 Word order · W-question" },
+    { id: 7, word: "Er ___ gern Romane.", ipa: "", question: "Complete: Er ___ gern Romane.", options: ["liest", "lest", "lesst", "lese"], correctIndex: 0, reference: "2.1 Strong verbs" },
+    { id: 8, word: "___ du oft Auto?", ipa: "", question: "Complete: ___ du oft Auto?", options: ["Fährst", "Fahrst", "Fahrt", "Fahren"], correctIndex: 0, reference: "2.1 Strong verbs" },
+    { id: 9, word: "Das Kind ___ gern Schokolade.", ipa: "", question: "Complete: Das Kind ___ gern Schokolade.", options: ["isst", "esst", "essen", "esse"], correctIndex: 0, reference: "2.1 Strong verbs" },
+    { id: 10, word: "___ Tisch ist groß.", ipa: "", question: "Complete: ___ Tisch ist groß.", options: ["Der", "Die", "Das", "Den"], correctIndex: 0, reference: "2.2 Nouns & articles · nominative" },
+    { id: 11, word: "___ Lampe ist neu.", ipa: "", question: "Complete: ___ Lampe ist neu.", options: ["Die", "Der", "Das", "Den"], correctIndex: 0, reference: "2.2 Nouns & articles · nominative" },
+    { id: 12, word: "Guten Tag, Herr Meier! Wie geht es ___?", ipa: "", question: "Complete: Guten Tag, Herr Meier! Wie geht es ___?", options: ["Ihnen", "dir", "euch", "ihm"], correctIndex: 0, reference: "2.3 Formal address" },
+    { id: 13, word: "___ Zeitung liegt auf dem Tisch.", ipa: "", question: "Complete: ___ Zeitung liegt auf dem Tisch.", options: ["Die", "Der", "Das", "Den"], correctIndex: 0, reference: "3.1 Gender rules · -ung" },
+    { id: 14, word: "___ Mädchen spielt im Garten.", ipa: "", question: "Complete: ___ Mädchen spielt im Garten.", options: ["Das", "Die", "Der", "Den"], correctIndex: 0, reference: "3.1 Gender rules · -chen" },
+    { id: 15, word: "das Haus + die Tür = ?", ipa: "", question: "What is the correct compound: das Haus + die Tür?", options: ["die Haustür", "das Haustür", "der Haustür", "die Türhaus"], correctIndex: 0, reference: "3.2 Compound nouns" },
+    { id: 16, word: "Der Kaffee ist ___.", ipa: "", question: "Complete: Der Kaffee ist ___.", options: ["heiß", "heiße", "heißer", "heißen"], correctIndex: 0, reference: "3.3 Adjective · predicative" },
+    { id: 17, word: "Der Zug ___ um acht Uhr ab.", ipa: "", question: "Complete: Der Zug ___ um acht Uhr ab.", options: ["fährt", "fahrt", "abfährt", "fahren"], correctIndex: 0, reference: "4.1 Separable verbs" },
+    { id: 18, word: "Ich ___ die Frage nicht.", ipa: "", question: "Complete: Ich ___ die Frage nicht.", options: ["verstehe", "verstehst", "versteht", "verstehen"], correctIndex: 0, reference: "4.1 Inseparable verbs" },
+    { id: 19, word: "Wann ___ du heute auf?", ipa: "", question: "Complete: Wann ___ du heute auf? (aufstehen)", options: ["stehst", "steht", "aufstehst", "stehen"], correctIndex: 0, reference: "4.1 Separable verbs" },
+    { id: 20, word: "Ich habe ___ Hund.", ipa: "", question: "Complete: Ich habe ___ Hund.", options: ["einen", "ein", "eine", "einem"], correctIndex: 0, reference: "4.2 Nouns & articles · accusative" },
+    { id: 21, word: "Wir kaufen ___ Tisch.", ipa: "", question: "Complete: Wir kaufen ___ Tisch.", options: ["den", "der", "dem", "das"], correctIndex: 0, reference: "4.2 Nouns & articles · accusative" },
+    { id: 22, word: "Wo ist Paul? Ich sehe ___ nicht.", ipa: "", question: "Complete: Wo ist Paul? Ich sehe ___ nicht.", options: ["ihn", "er", "ihm", "sie"], correctIndex: 0, reference: "4.3 Personal pronouns · accusative" },
+    { id: 23, word: "Das ist ___ Bruder.", ipa: "", question: "Complete: Das ist ___ Bruder.", options: ["mein", "meine", "meinen", "meiner"], correctIndex: 0, reference: "5.1 Possessive articles" },
+    { id: 24, word: "Wie heißt ___ Mutter?", ipa: "", question: "Complete: Wie heißt ___ Mutter?", options: ["deine", "dein", "deinen", "deiner"], correctIndex: 0, reference: "5.1 Possessive articles" },
+    { id: 25, word: "Gestern ___ ich krank.", ipa: "", question: "Complete: Gestern ___ ich krank.", options: ["war", "bin", "bist", "warst"], correctIndex: 0, reference: "5.2 Präteritum · sein" },
+    { id: 26, word: "Wir ___ letztes Jahr in Wien.", ipa: "", question: "Complete: Wir ___ letztes Jahr in Wien.", options: ["waren", "sind", "war", "wart"], correctIndex: 0, reference: "5.2 Präteritum · sein" },
+    { id: 27, word: "Als Kind ___ ich einen Hund.", ipa: "", question: "Complete: Als Kind ___ ich einen Hund.", options: ["hatte", "habe", "hatten", "hattest"], correctIndex: 0, reference: "5.2 Präteritum · haben" },
+    { id: 28, word: "Ich gehe ___ ins Schwimmbad.", ipa: "", question: "Complete: Ich gehe ___ ins Schwimmbad. (= frequently)", options: ["oft", "viel", "sehr", "gut"], correctIndex: 0, reference: "5.3 Time adverbs" },
+    { id: 29, word: "Ich helfe ___ Mann.", ipa: "", question: "Complete: Ich helfe ___ Mann.", options: ["dem", "den", "der", "das"], correctIndex: 0, reference: "6.1 Nouns & articles · dative" },
+    { id: 30, word: "Sie gibt ___ Kindern Schokolade.", ipa: "", question: "Complete: Sie gibt ___ Kindern Schokolade.", options: ["den", "die", "dem", "der"], correctIndex: 0, reference: "6.1 Dative · plural" },
+    { id: 31, word: "Ich danke ___ für das Geschenk.", ipa: "", question: "Complete: Ich danke ___ für das Geschenk.", options: ["dir", "dich", "du", "dein"], correctIndex: 0, reference: "6.2 Pronouns · dative" },
+    { id: 32, word: "Der Film gefällt ___.", ipa: "", question: "Complete: Der Film gefällt ___. (= I like it)", options: ["mir", "mich", "ich", "mein"], correctIndex: 0, reference: "6.2 Pronouns · dative" },
+    { id: 33, word: "___ bitte langsamer! (du, fahren)", ipa: "", question: "Complete the imperative: ___ bitte langsamer! (du, fahren)", options: ["Fahr", "Fährst", "Fahren", "Fahrt"], correctIndex: 0, reference: "6.3 Imperative · du" },
+    { id: 34, word: "___ Sie bitte hier! (warten)", ipa: "", question: "Complete the imperative: ___ Sie bitte hier! (warten)", options: ["Warten", "Wartet", "Warte", "Wart"], correctIndex: 0, reference: "6.3 Imperative · Sie" },
+    { id: 35, word: "Am Montag ___ ich nach Berlin.", ipa: "", question: "Complete: Am Montag ___ ich nach Berlin.", options: ["fahre", "ich fahre", "fahren", "fährt"], correctIndex: 0, reference: "7.1 Sentence structure · inversion" },
+    { id: 36, word: "Ich ___ heute länger arbeiten.", ipa: "", question: "Complete: Ich ___ heute länger arbeiten.", options: ["muss", "musst", "müssen", "müsst"], correctIndex: 0, reference: "7.2 Modal verbs" },
+    { id: 37, word: "___ du Klavier spielen?", ipa: "", question: "Complete: ___ du Klavier spielen?", options: ["Kannst", "Kann", "Könnt", "Können"], correctIndex: 0, reference: "7.2 Modal verbs" },
+    { id: 38, word: "Ich ___ ein Glas Wasser, bitte.", ipa: "", question: "Complete: Ich ___ ein Glas Wasser, bitte.", options: ["möchte", "möchtest", "mögen", "möchten"], correctIndex: 0, reference: "7.2 Modal verbs" },
+    { id: 39, word: "Ich fahre ___ dem Bus zur Arbeit.", ipa: "", question: "Complete: Ich fahre ___ dem Bus zur Arbeit.", options: ["mit", "für", "durch", "ohne"], correctIndex: 0, reference: "7.3 Prepositions + dative" },
+    { id: 40, word: "Wir wohnen ___ einem Jahr in Passau.", ipa: "", question: "Complete: Wir wohnen ___ einem Jahr in Passau.", options: ["seit", "bis", "für", "durch"], correctIndex: 0, reference: "7.3 Prepositions + dative" },
+    { id: 41, word: "Ich ___ gestern Pizza gegessen.", ipa: "", question: "Complete: Ich ___ gestern Pizza gegessen.", options: ["habe", "bin", "hat", "war"], correctIndex: 0, reference: "8.1 Perfekt · haben" },
+    { id: 42, word: "Er ___ nach Berlin gefahren.", ipa: "", question: "Complete: Er ___ nach Berlin gefahren.", options: ["ist", "hat", "war", "sind"], correctIndex: 0, reference: "8.1 Perfekt · sein" },
+    { id: 43, word: "Ich bleibe zu Hause, ___ ich bin müde.", ipa: "", question: "Complete: Ich bleibe zu Hause, ___ ich bin müde.", options: ["denn", "weil", "dass", "obwohl"], correctIndex: 0, reference: "8.2 Main-clause conjunctions" },
+    { id: 44, word: "Wir gehen ___ den Park.", ipa: "", question: "Complete: Wir gehen ___ den Park.", options: ["durch", "mit", "aus", "bei"], correctIndex: 0, reference: "8.3 Prepositions + accusative" }
+  ],
+  es: [
+    { id: 1, word: "Ich ___ aus Spanien.", ipa: "", question: "Completa: Ich ___ aus Spanien.", options: ["komme", "kommst", "kommt", "kommen"], correctIndex: 0, reference: "1.1 Conjugación del verbo" },
+    { id: 2, word: "Wir ___ jeden Tag Deutsch.", ipa: "", question: "Completa: Wir ___ jeden Tag Deutsch.", options: ["lernen", "lernt", "lernst", "lerne"], correctIndex: 0, reference: "1.1 Conjugación del verbo" },
+    { id: 3, word: "Ihr ___ sehr schnell.", ipa: "", question: "Completa: Ihr ___ sehr schnell.", options: ["arbeitet", "arbeiten", "arbeitest", "arbeite"], correctIndex: 0, reference: "1.1 Conjugación del verbo" },
+    { id: 4, word: "___ ist Lehrerin. Sie heißt Frau Berg.", ipa: "", question: "Completa: ___ ist Lehrerin. Sie heißt Frau Berg.", options: ["Sie", "Er", "Es", "Wir"], correctIndex: 0, reference: "1.2 Pronombres personales · nominativo" },
+    { id: 5, word: "___ du aus Italien?", ipa: "", question: "Completa: ___ du aus Italien?", options: ["Kommst", "Kommen", "Kommt", "Komme"], correctIndex: 0, reference: "1.3 Orden de palabras · pregunta" },
+    { id: 6, word: "Woher ___ Sie?", ipa: "", question: "Completa: Woher ___ Sie?", options: ["kommen", "kommt", "kommst", "komme"], correctIndex: 0, reference: "1.3 Orden de palabras · pregunta con W" },
+    { id: 7, word: "Er ___ gern Romane.", ipa: "", question: "Completa: Er ___ gern Romane.", options: ["liest", "lest", "lesst", "lese"], correctIndex: 0, reference: "2.1 Verbos fuertes" },
+    { id: 8, word: "___ du oft Auto?", ipa: "", question: "Completa: ___ du oft Auto?", options: ["Fährst", "Fahrst", "Fahrt", "Fahren"], correctIndex: 0, reference: "2.1 Verbos fuertes" },
+    { id: 9, word: "Das Kind ___ gern Schokolade.", ipa: "", question: "Completa: Das Kind ___ gern Schokolade.", options: ["isst", "esst", "essen", "esse"], correctIndex: 0, reference: "2.1 Verbos fuertes" },
+    { id: 10, word: "___ Tisch ist groß.", ipa: "", question: "Completa: ___ Tisch ist groß.", options: ["Der", "Die", "Das", "Den"], correctIndex: 0, reference: "2.2 Sustantivos y artículos · nominativo" },
+    { id: 11, word: "___ Lampe ist neu.", ipa: "", question: "Completa: ___ Lampe ist neu.", options: ["Die", "Der", "Das", "Den"], correctIndex: 0, reference: "2.2 Sustantivos y artículos · nominativo" },
+    { id: 12, word: "Guten Tag, Herr Meier! Wie geht es ___?", ipa: "", question: "Completa: Guten Tag, Herr Meier! Wie geht es ___?", options: ["Ihnen", "dir", "euch", "ihm"], correctIndex: 0, reference: "2.3 Tratamiento formal" },
+    { id: 13, word: "___ Zeitung liegt auf dem Tisch.", ipa: "", question: "Completa: ___ Zeitung liegt auf dem Tisch.", options: ["Die", "Der", "Das", "Den"], correctIndex: 0, reference: "3.1 Reglas de género · -ung" },
+    { id: 14, word: "___ Mädchen spielt im Garten.", ipa: "", question: "Completa: ___ Mädchen spielt im Garten.", options: ["Das", "Die", "Der", "Den"], correctIndex: 0, reference: "3.1 Reglas de género · -chen" },
+    { id: 15, word: "das Haus + die Tür = ?", ipa: "", question: "¿Cuál es el compuesto correcto: das Haus + die Tür?", options: ["die Haustür", "das Haustür", "der Haustür", "die Türhaus"], correctIndex: 0, reference: "3.2 Palabras compuestas" },
+    { id: 16, word: "Der Kaffee ist ___.", ipa: "", question: "Completa: Der Kaffee ist ___.", options: ["heiß", "heiße", "heißer", "heißen"], correctIndex: 0, reference: "3.3 Adjetivo · predicativo" },
+    { id: 17, word: "Der Zug ___ um acht Uhr ab.", ipa: "", question: "Completa: Der Zug ___ um acht Uhr ab.", options: ["fährt", "fahrt", "abfährt", "fahren"], correctIndex: 0, reference: "4.1 Verbos separables" },
+    { id: 18, word: "Ich ___ die Frage nicht.", ipa: "", question: "Completa: Ich ___ die Frage nicht.", options: ["verstehe", "verstehst", "versteht", "verstehen"], correctIndex: 0, reference: "4.1 Verbos inseparables" },
+    { id: 19, word: "Wann ___ du heute auf?", ipa: "", question: "Completa: Wann ___ du heute auf? (aufstehen)", options: ["stehst", "steht", "aufstehst", "stehen"], correctIndex: 0, reference: "4.1 Verbos separables" },
+    { id: 20, word: "Ich habe ___ Hund.", ipa: "", question: "Completa: Ich habe ___ Hund.", options: ["einen", "ein", "eine", "einem"], correctIndex: 0, reference: "4.2 Sustantivos y artículos · acusativo" },
+    { id: 21, word: "Wir kaufen ___ Tisch.", ipa: "", question: "Completa: Wir kaufen ___ Tisch.", options: ["den", "der", "dem", "das"], correctIndex: 0, reference: "4.2 Sustantivos y artículos · acusativo" },
+    { id: 22, word: "Wo ist Paul? Ich sehe ___ nicht.", ipa: "", question: "Completa: Wo ist Paul? Ich sehe ___ nicht.", options: ["ihn", "er", "ihm", "sie"], correctIndex: 0, reference: "4.3 Pronombres personales · acusativo" },
+    { id: 23, word: "Das ist ___ Bruder.", ipa: "", question: "Completa: Das ist ___ Bruder.", options: ["mein", "meine", "meinen", "meiner"], correctIndex: 0, reference: "5.1 Artículos posesivos" },
+    { id: 24, word: "Wie heißt ___ Mutter?", ipa: "", question: "Completa: Wie heißt ___ Mutter?", options: ["deine", "dein", "deinen", "deiner"], correctIndex: 0, reference: "5.1 Artículos posesivos" },
+    { id: 25, word: "Gestern ___ ich krank.", ipa: "", question: "Completa: Gestern ___ ich krank.", options: ["war", "bin", "bist", "warst"], correctIndex: 0, reference: "5.2 Pretérito · sein" },
+    { id: 26, word: "Wir ___ letztes Jahr in Wien.", ipa: "", question: "Completa: Wir ___ letztes Jahr in Wien.", options: ["waren", "sind", "war", "wart"], correctIndex: 0, reference: "5.2 Pretérito · sein" },
+    { id: 27, word: "Als Kind ___ ich einen Hund.", ipa: "", question: "Completa: Als Kind ___ ich einen Hund.", options: ["hatte", "habe", "hatten", "hattest"], correctIndex: 0, reference: "5.2 Pretérito · haben" },
+    { id: 28, word: "Ich gehe ___ ins Schwimmbad.", ipa: "", question: "Completa: Ich gehe ___ ins Schwimmbad. (= a menudo)", options: ["oft", "viel", "sehr", "gut"], correctIndex: 0, reference: "5.3 Adverbios de tiempo" },
+    { id: 29, word: "Ich helfe ___ Mann.", ipa: "", question: "Completa: Ich helfe ___ Mann.", options: ["dem", "den", "der", "das"], correctIndex: 0, reference: "6.1 Sustantivos y artículos · dativo" },
+    { id: 30, word: "Sie gibt ___ Kindern Schokolade.", ipa: "", question: "Completa: Sie gibt ___ Kindern Schokolade.", options: ["den", "die", "dem", "der"], correctIndex: 0, reference: "6.1 Dativo · plural" },
+    { id: 31, word: "Ich danke ___ für das Geschenk.", ipa: "", question: "Completa: Ich danke ___ für das Geschenk.", options: ["dir", "dich", "du", "dein"], correctIndex: 0, reference: "6.2 Pronombres · dativo" },
+    { id: 32, word: "Der Film gefällt ___.", ipa: "", question: "Completa: Der Film gefällt ___. (= me gusta)", options: ["mir", "mich", "ich", "mein"], correctIndex: 0, reference: "6.2 Pronombres · dativo" },
+    { id: 33, word: "___ bitte langsamer! (du, fahren)", ipa: "", question: "Completa el imperativo: ___ bitte langsamer! (du, fahren)", options: ["Fahr", "Fährst", "Fahren", "Fahrt"], correctIndex: 0, reference: "6.3 Imperativo · du" },
+    { id: 34, word: "___ Sie bitte hier! (warten)", ipa: "", question: "Completa el imperativo: ___ Sie bitte hier! (warten)", options: ["Warten", "Wartet", "Warte", "Wart"], correctIndex: 0, reference: "6.3 Imperativo · Sie" },
+    { id: 35, word: "Am Montag ___ ich nach Berlin.", ipa: "", question: "Completa: Am Montag ___ ich nach Berlin.", options: ["fahre", "ich fahre", "fahren", "fährt"], correctIndex: 0, reference: "7.1 Estructura · inversión" },
+    { id: 36, word: "Ich ___ heute länger arbeiten.", ipa: "", question: "Completa: Ich ___ heute länger arbeiten.", options: ["muss", "musst", "müssen", "müsst"], correctIndex: 0, reference: "7.2 Verbos modales" },
+    { id: 37, word: "___ du Klavier spielen?", ipa: "", question: "Completa: ___ du Klavier spielen?", options: ["Kannst", "Kann", "Könnt", "Können"], correctIndex: 0, reference: "7.2 Verbos modales" },
+    { id: 38, word: "Ich ___ ein Glas Wasser, bitte.", ipa: "", question: "Completa: Ich ___ ein Glas Wasser, bitte.", options: ["möchte", "möchtest", "mögen", "möchten"], correctIndex: 0, reference: "7.2 Verbos modales" },
+    { id: 39, word: "Ich fahre ___ dem Bus zur Arbeit.", ipa: "", question: "Completa: Ich fahre ___ dem Bus zur Arbeit.", options: ["mit", "für", "durch", "ohne"], correctIndex: 0, reference: "7.3 Preposiciones + dativo" },
+    { id: 40, word: "Wir wohnen ___ einem Jahr in Passau.", ipa: "", question: "Completa: Wir wohnen ___ einem Jahr in Passau.", options: ["seit", "bis", "für", "durch"], correctIndex: 0, reference: "7.3 Preposiciones + dativo" },
+    { id: 41, word: "Ich ___ gestern Pizza gegessen.", ipa: "", question: "Completa: Ich ___ gestern Pizza gegessen.", options: ["habe", "bin", "hat", "war"], correctIndex: 0, reference: "8.1 Perfekt · haben" },
+    { id: 42, word: "Er ___ nach Berlin gefahren.", ipa: "", question: "Completa: Er ___ nach Berlin gefahren.", options: ["ist", "hat", "war", "sind"], correctIndex: 0, reference: "8.1 Perfekt · sein" },
+    { id: 43, word: "Ich bleibe zu Hause, ___ ich bin müde.", ipa: "", question: "Completa: Ich bleibe zu Hause, ___ ich bin müde.", options: ["denn", "weil", "dass", "obwohl"], correctIndex: 0, reference: "8.2 Conjunciones coordinantes" },
+    { id: 44, word: "Wir gehen ___ den Park.", ipa: "", question: "Completa: Wir gehen ___ den Park.", options: ["durch", "mit", "aus", "bei"], correctIndex: 0, reference: "8.3 Preposiciones + acusativo" }
+  ]
+};

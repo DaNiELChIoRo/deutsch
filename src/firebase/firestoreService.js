@@ -94,6 +94,43 @@ export async function getTranslations(lang) {
   return null;
 }
 
+// --- Per-device custom vocabulary ---
+//
+// One document per device id, holding that device's user-added words. Deliberately
+// not run through the 1-hour cache above: this data is written by the user and must
+// read back immediately, so localStorage is the source of truth and Firestore is the
+// cross-device copy (see hooks/useCustomVocabulary.js).
+
+const CUSTOM_VOCAB_COLLECTION = 'userVocabulary';
+
+/**
+ * All of a device's custom decks: { [deckId]: [word, ...] }.
+ * Returns null when Firestore is unreachable — distinct from {} (nothing saved yet).
+ */
+export async function getCustomVocabulary(deviceId) {
+  try {
+    const snap = await getDoc(doc(db, CUSTOM_VOCAB_COLLECTION, deviceId));
+    if (!snap.exists()) return {};
+    const data = snap.data();
+    return data.decks || {};
+  } catch (err) {
+    console.warn('Firestore getCustomVocabulary failed:', err.message);
+    return null;
+  }
+}
+
+/**
+ * Write one deck. merge:true so decks are independent — saving the FES list must
+ * not clobber a list the learner built on another deck.
+ */
+export async function saveCustomVocabularyDeck(deviceId, deckId, words) {
+  await setDoc(
+    doc(db, CUSTOM_VOCAB_COLLECTION, deviceId),
+    { deviceId, decks: { [deckId]: words }, updatedAt: Date.now() },
+    { merge: true }
+  );
+}
+
 // --- Write functions (Admin) ---
 
 export async function saveBooks(books) {

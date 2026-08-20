@@ -1,0 +1,70 @@
+rules_version = '2';
+
+// Deploy with:  firebase deploy --only firestore:rules
+//
+// ─── Read this before enabling custom vocabulary in production ────────────────
+//
+// This app has no sign-in. A word list is addressed by a random v4 UUID generated
+// on the device (src/utils/deviceId.js) and kept in localStorage. That UUID is a
+// bearer token, NOT an identity: anyone holding it can read and overwrite that
+// document. Security here rests entirely on the id being unguessable — 122 bits
+// of randomness, so brute force is not a practical concern, but the id must be
+// treated like a password. Do not log it, put it in a URL, or paste it anywhere
+// public.
+//
+// What these rules do buy you:
+//   * `list` is denied, so the collection cannot be enumerated. Without a valid
+//     id an attacker has nothing to attack.
+//   * The document id must look like a UUID, so junk keys can't be created.
+//   * Payloads are shape- and size-checked, so the collection can't be used as
+//     free unbounded storage.
+//
+// What they cannot do: stop someone who has obtained a device id from reading or
+// clobbering that one list. If that matters, switch to Firebase Anonymous Auth
+// and key documents on `request.auth.uid` — that is the real fix, and the client
+// change is small (swap getDeviceId() for the auth uid).
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── Bundled content: public read, no client writes ──
+    // The app ships hardcoded fallbacks for all of this, so a total denial here
+    // degrades gracefully rather than breaking the app.
+    match /quizzes/{quizId} {
+      allow read: if true;
+      allow write: if false;   // edit via console / admin SDK
+    }
+
+    match /translations/{lang} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ── Per-device custom vocabulary ──
+    match /userVocabulary/{deviceId} {
+
+      function isUuid() {
+        return deviceId.matches('^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$');
+      }
+
+      function validPayload() {
+        let d = request.resource.data;
+        return d.keys().hasOnly(['deviceId', 'decks', 'updatedAt'])
+            && d.deviceId == deviceId
+            && d.decks is map
+            && d.decks.keys().size() <= 20    // one entry per deck
+            && d.updatedAt is number;
+      }
+
+      // `get` only — `list` stays denied so the collection can't be walked.
+      allow get: if isUuid();
+      allow create, update: if isUuid() && validPayload();
+      allow delete: if false;
+    }
+
+    // Everything else is closed.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
