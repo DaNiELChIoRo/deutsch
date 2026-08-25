@@ -12,6 +12,13 @@ const TOOLS = [
     path: '/flashcards',
   },
   {
+    icon: '💬',
+    key: 'top-500',
+    en: 'Top 500 Everyday Words',
+    es: 'Las 500 Palabras Más Usadas',
+    path: '/top-500',
+  },
+  {
     icon: '🎓',
     key: 'fes-iztacala-2',
     en: 'Vocabulary level 2 · FES Iztacala',

@@ -10,7 +10,7 @@ import '../styles/FlashCards.css';
 const CARDS_PER_PAGE = 6;
 
 // Quizzes that accept user-added words. Others stay read-only.
-const CUSTOM_WORDS_ENABLED_FOR = ['german-vocabulary', 'fes-iztacala-level-2'];
+const CUSTOM_WORDS_ENABLED_FOR = ['german-vocabulary', 'fes-iztacala-level-2', 'top-500-words'];
 
 // Decks that are graded exam drills, not a vocabulary set to memorize —
 // these skip the flip-card study mode and go straight to the quiz.

@@ -3,6 +3,7 @@ import { getAllQuizzes, getTranslations as fetchTranslations } from '../firebase
 import { GERMAN_VOCABULARY_QUIZ } from '../utils/germanVocabulary';
 import { A1_EXAM_PRACTICE_QUIZ } from '../utils/a1ExamPractice';
 import { FES_IZTACALA_LEVEL_2_QUIZ } from '../utils/fesIztacalaLevel2';
+import { TOP_500_WORDS_QUIZ } from '../utils/top500Words';
 import { translations as hardcodedTranslations } from '../i18n/translations';
 
 const DataContext = createContext(null);
@@ -20,6 +21,18 @@ const FALLBACK_QUIZZES = [
     category: 'knowledge',
     en: GERMAN_VOCABULARY_QUIZ.en,
     es: GERMAN_VOCABULARY_QUIZ.es
+  },
+  {
+    id: 'top-500-words',
+    title: { en: 'Top 500 everyday words', es: 'Las 500 palabras más usadas' },
+    description: {
+      en: 'The most common German words for daily life, grouped by topic',
+      es: 'Las palabras alemanas más comunes del día a día, agrupadas por tema'
+    },
+    icon: '💬',
+    category: 'knowledge',
+    en: TOP_500_WORDS_QUIZ.en,
+    es: TOP_500_WORDS_QUIZ.es
   },
   {
     id: 'fes-iztacala-level-2',

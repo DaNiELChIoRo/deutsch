@@ -83,21 +83,26 @@ degrades to an "offline" badge and never drops the word.
 `deutsch-custom-vocabulary-<deckId>` and writes Firestore with `merge: true`, so words added
 to one deck never leak into another and saving one deck can't clobber another. Decks that
 accept custom words are listed in `CUSTOM_WORDS_ENABLED_FOR` in `FlashCards.jsx` — currently
-`german-vocabulary` and `fes-iztacala-level-2`. The A1 exam set is deliberately excluded:
+`german-vocabulary`, `fes-iztacala-level-2` and `top-500-words`. The A1 exam set is excluded:
 it's a fixed practice set, not a personal list.
 
 ### Quiz decks
 
-Three decks are registered in `DataContext.jsx` `FALLBACK_QUIZZES`, each backed by a file in
+Four decks are registered in `DataContext.jsx` `FALLBACK_QUIZZES`, each backed by a file in
 `src/utils/` and reachable through its own route:
 
 | id | route | source | custom words |
 |---|---|---|---|
 | `german-vocabulary` | `/flashcards` | `germanVocabulary.js` | yes |
+| `top-500-words` | `/top-500` | `top500Words.js` | yes |
 | `fes-iztacala-level-2` | `/fes-iztacala-2` | `fesIztacalaLevel2.js` | yes |
 | `a1-exam-practice` | `/a1-exam` | `a1ExamPractice.js` | no |
 
-All three share the card shape, so `FlashCards.jsx` renders any of them. Adding a fourth
+They all share the card shape, so `FlashCards.jsx` renders any of them.
+`top500Words.js` is the odd one out: it stores a compact `[word, ipa, en, es, category]`
+table and expands it via `buildDeck()`, rather than listing 1000 card objects. Distractors
+are pulled deterministically from the same category — same topic makes the question test the
+word rather than the topic, and determinism keeps the deck stable across reloads. Adding a fourth
 means: a file in `src/utils/`, an entry in `FALLBACK_QUIZZES`, a `<Route>` in
 `GermanSection.jsx`, and a tile in the `TOOLS` array in `GermanLanding.jsx`.
 

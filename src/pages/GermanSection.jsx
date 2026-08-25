@@ -85,6 +85,7 @@ const GermanSection = () => {
       <Route path="flashcards" element={<FlashCards quizId="german-vocabulary" onHome={goSection} />} />
       <Route path="a1-exam" element={<FlashCards quizId="a1-exam-practice" onHome={goSection} />} />
       <Route path="fes-iztacala-2" element={<FlashCards quizId="fes-iztacala-level-2" onHome={goSection} />} />
+      <Route path="top-500" element={<FlashCards quizId="top-500-words" onHome={goSection} />} />
       <Route path="map" element={<GermanyMap onHome={goSection} />} />
       <Route path="speaking" element={<GermanSpeakingGame onHome={goSection} />} />
       <Route path="w-fragen" element={<WFragenLesson onHome={goSection} />} />
